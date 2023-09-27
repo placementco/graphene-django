@@ -220,7 +220,6 @@ def convert_field_to_boolean(field, registry=None):
     )
 
 
-@convert_django_field.register(models.DecimalField)
 def convert_field_to_decimal(field, registry=None):
     return Decimal(
         description=get_django_field_description(field), required=not field.null
@@ -229,6 +228,7 @@ def convert_field_to_decimal(field, registry=None):
 
 @convert_django_field.register(models.FloatField)
 @convert_django_field.register(models.DurationField)
+@convert_django_field.register(models.DecimalField)
 def convert_field_to_float(field, registry=None):
     return Float(
         description=get_django_field_description(field), required=not field.null
